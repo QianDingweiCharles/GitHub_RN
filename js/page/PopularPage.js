@@ -1,15 +1,96 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
+import { createMaterialTopTabNavigator } from 'react-navigation'
 
-export default class PopularPage extends React.Component {
+class PopularTab1 extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>PopularPage</Text>
+        <Text style={styles.welcome}>Tab1</Text>
       </View>
     )
   }
 }
+
+class PopularTab2 extends React.Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}>Tab2</Text>
+      </View>
+    )
+  }
+}
+
+class PopularTab3 extends React.Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}>Tab3</Text>
+      </View>
+    )
+  }
+}
+
+class PopularTab4 extends React.Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}>Tab4</Text>
+      </View>
+    )
+  }
+}
+
+export default createMaterialTopTabNavigator(
+  {
+    PopularTab1: {
+      screen: PopularTab1,
+      navigationOptions: {
+        tabBarLabel: 'All'
+      }
+    },
+    PopularTab2: {
+      screen: PopularTab2,
+      navigationOptions: {
+        tabBarLabel: 'IOS'
+      }
+    },
+    PopularTab3: {
+      screen: PopularTab3,
+      navigationOptions: {
+        tabBarLabel: 'Android'
+      }
+    },
+    PopularTab4: {
+      screen: PopularTab4,
+      navigationOptions: {
+        tabBarLabel: 'MI'
+      }
+    }
+  },
+  {
+    tabBarOptions: {
+      tabStyle: {
+        minWidth: 50,
+        upperCaseLabel: false
+      },
+      scrollEnabled: true,
+      style: {
+        backgroundColor: 'blue'
+      },
+      indicatorStyle: {
+        height: 2,
+        backgroundColor: 'white'
+      },
+      labelStyle: {
+        fontSize: 13,
+        marginTop: 6,
+        marginBottom: 6
+      }
+    }
+  }
+)
 
 const styles = StyleSheet.create({
   container: {

@@ -63,7 +63,7 @@ export default createBottomTabNavigator(
   },
   {
     tabBarOptions: {
-      activeTintColor: Platform.OS === 'ios' ? '#e91e63' : '#f00'
+      activeTintColor: Platform.OS === 'ios' ? '#e91e63' : 'blue'
     }
   }
 )
