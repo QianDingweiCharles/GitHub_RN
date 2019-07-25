@@ -16,11 +16,12 @@ import {
   ReloadInstructions
 } from 'react-native/Libraries/NewAppScreen'
 
+import NavigationUtil from '../navigator/NavigationUtil.js'
+
 export default class WelcomePage extends React.Component {
   componentDidMount() {
     this.timer = setTimeout(() => {
-      const { navigate } = this.props.navigation
-      navigate('Main')
+      NavigationUtil.resetToHomePage({ navigation: this.props.navigation })
     }, 2000)
   }
 
