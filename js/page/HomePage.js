@@ -6,6 +6,9 @@ import TrendingPage from './TrendingPage.js'
 import FavoritePage from './FavoritePage.js'
 import MyPage from './MyPage.js'
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import Ionicons from 'react-native-vector-icons/Ionicons'
+import Entypo from 'react-native-vector-icons/Entypo'
 
 export default createBottomTabNavigator(
   {
@@ -14,8 +17,8 @@ export default createBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: '最热',
         tabBarIcon: ({ tintColor, focused }) => (
-          <AntDesign
-            name={'clouddownloado'}
+          <MaterialIcons
+            name={'whatshot'}
             size={26}
             style={{ color: tintColor }}
           />
@@ -27,8 +30,8 @@ export default createBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: '趋势',
         tabBarIcon: ({ tintColor, focused }) => (
-          <AntDesign
-            name={'clouddownloado'}
+          <Ionicons
+            name={'md-trending-up'}
             size={26}
             style={{ color: tintColor }}
           />
@@ -40,8 +43,8 @@ export default createBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: '收藏',
         tabBarIcon: ({ tintColor, focused }) => (
-          <AntDesign
-            name={'clouddownloado'}
+          <MaterialIcons
+            name={'favorite'}
             size={26}
             style={{ color: tintColor }}
           />
@@ -53,11 +56,7 @@ export default createBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: '我的',
         tabBarIcon: ({ tintColor, focused }) => (
-          <AntDesign
-            name={'clouddownloado'}
-            size={26}
-            style={{ color: tintColor }}
-          />
+          <Entypo name={'user'} size={26} style={{ color: tintColor }} />
         )
       }
     }
