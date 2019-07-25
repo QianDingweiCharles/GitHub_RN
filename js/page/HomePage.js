@@ -8,6 +8,7 @@ import MyPage from './MyPage.js'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Entypo from 'react-native-vector-icons/Entypo'
+// export * from '../navigator/DynamicTabNavigator.js'
 
 export default createBottomTabNavigator(
   {
@@ -66,15 +67,3 @@ export default createBottomTabNavigator(
     }
   }
 )
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
-  },
-  welcome: {
-    fontSize: 20
-  }
-})
