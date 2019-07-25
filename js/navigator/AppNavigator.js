@@ -1,7 +1,5 @@
 import {
   createStackNavigator,
-  createBottomTabNavigator,
-  createMaterialTopTabNavigator,
   createSwitchNavigator,
   createAppContainer
 } from 'react-navigation'
@@ -21,7 +19,10 @@ const initNavigator = createStackNavigator({
 
 const MainNavigator = createStackNavigator({
   HomePage: {
-    screen: HomePage
+    screen: HomePage,
+    navigationOptions: {
+      header: null
+    }
   },
   DetailPage: {
     screen: DetailPage,
@@ -36,10 +37,7 @@ export default createAppContainer(
       Main: MainNavigator
     },
     {
-      initialRouteName: 'Init',
-      navigationOptions: {
-        header: null
-      }
+      initialRouteName: 'Init'
     }
   )
 )

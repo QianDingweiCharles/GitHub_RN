@@ -1,20 +1,5 @@
 import React, { Fragment } from 'react'
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar
-} from 'react-native'
-
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions
-} from 'react-native/Libraries/NewAppScreen'
+import { StyleSheet, View, Text } from 'react-native'
 
 import NavigationUtil from '../navigator/NavigationUtil.js'
 
@@ -22,7 +7,7 @@ export default class WelcomePage extends React.Component {
   componentDidMount() {
     this.timer = setTimeout(() => {
       NavigationUtil.resetToHomePage({ navigation: this.props.navigation })
-    }, 2000)
+    }, 200)
   }
 
   componentWillUnmount() {

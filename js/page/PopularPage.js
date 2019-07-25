@@ -1,12 +1,21 @@
 import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, Text, Button } from 'react-native'
 import { createMaterialTopTabNavigator } from 'react-navigation'
+import NavigationUtil from '../navigator/NavigationUtil.js'
 
 class PopularTab1 extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Tab1</Text>
+        <Button
+          onPress={() => {
+            NavigationUtil.goPage(
+              { navigation: this.props.navigation },
+              'DetailPage'
+            )
+          }}
+          title="跳转到详情页面"
+        />
       </View>
     )
   }

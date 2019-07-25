@@ -1,7 +1,18 @@
 export default class NavigationUtil {
-  static resetToHomePage(navigation) {
+  // 跳转到指定页面
+  static goPage(params, page) {
+    const { navigation } = params
+    if (!navigation) {
+      console.log('Navigation cannot be null')
+      return
+    }
+    navigation.navigate(page, { ...params })
+  }
+  // 返回上一个页面
+  static goBack(navigation) {
     navigation.goBack()
   }
+  // 跳转到主页
   static resetToHomePage(params) {
     const { navigation } = params
     navigation.navigate('Main')
