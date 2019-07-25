@@ -21,8 +21,7 @@ const initNavigator = createStackNavigator({
 
 const MainNavigator = createStackNavigator({
   HomePage: {
-    screen: HomePage,
-    navigationOptions: {}
+    screen: HomePage
   },
   DetailPage: {
     screen: DetailPage,
