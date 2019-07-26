@@ -10,8 +10,8 @@ import { connect } from 'react-redux'
 import {
   createReduxContainer,
   createReactNavigationReduxMiddleware
-  // createNavigationReducer
 } from 'react-navigation-redux-helpers'
+import FetchDemoPage from '../page/FetchDemoPage.js'
 
 export const rootCom = 'Init'
 
@@ -31,6 +31,10 @@ const MainNavigator = createStackNavigator({
   },
   DetailPage: {
     screen: DetailPage,
+    navigationOptions: {}
+  },
+  FetchDemoPage: {
+    screen: FetchDemoPage,
     navigationOptions: {}
   }
 })
