@@ -5,12 +5,9 @@ import actions from '../action/index.js'
 
 class FavoritePage extends React.Component {
   render() {
-    const { navigation } = this.props
-
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>FavoritePage</Text>
-
         <Button
           title="改变主题色--绿色"
           onPress={() => {

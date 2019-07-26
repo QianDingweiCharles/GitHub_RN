@@ -1,22 +1,17 @@
 import React from 'react'
 import { StyleSheet, View, Text, Button } from 'react-native'
+import { connect } from 'react-redux'
+import actions from '../action/index.js'
 
-export default class MyPage extends React.Component {
+class MyPage extends React.Component {
   render() {
-    const { navigation } = this.props
-
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>MyPage</Text>
         <Button
           title="改变主题色---黄色"
           onPress={() => {
-            navigation.setParams({
-              theme: {
-                tintColor: 'yellow',
-                updateTime: new Date().getTime()
-              }
-            })
+            this.props.onThemeChange('yellow')
           }}
         />
       </View>
@@ -35,3 +30,16 @@ const styles = StyleSheet.create({
     fontSize: 20
   }
 })
+
+const mapStateToProps = state => ({})
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onThemeChange: theme => dispatch(actions.onThemeChange(theme))
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MyPage)

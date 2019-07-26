@@ -5,7 +5,6 @@ import actions from '../action/index'
 
 class TrendingPage extends React.Component {
   render() {
-    const { navigation } = this.props
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>TrendingPage</Text>
