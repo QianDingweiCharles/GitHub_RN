@@ -6,12 +6,11 @@ import {
 import WelcomePage from '../page/WelcomePage'
 import HomePage from '../page/HomePage'
 import DetailPage from '../page/DetailPage'
-import DynamicTabNavigator from './DynamicTabNavigator'
 import { connect } from 'react-redux'
 import {
   createReduxContainer,
-  createReactNavigationReduxMiddleware,
-  createNavigationReducer
+  createReactNavigationReduxMiddleware
+  // createNavigationReducer
 } from 'react-navigation-redux-helpers'
 
 export const rootCom = 'Init'
@@ -55,8 +54,6 @@ export const middleware = createReactNavigationReduxMiddleware(
   state => state.nav,
   'root'
 )
-
-const AppWithNavigationState = createReduxContainer(RootNavigator, 'root')
 
 const App = createReduxContainer(RootNavigator)
 
