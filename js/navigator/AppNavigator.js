@@ -26,8 +26,8 @@ const initNavigator = createStackNavigator({
 })
 
 const MainNavigator = createStackNavigator({
-  DynamicTabNavigator: {
-    screen: DynamicTabNavigator,
+  HomePage: {
+    screen: HomePage,
     navigationOptions: {}
   },
   DetailPage: {

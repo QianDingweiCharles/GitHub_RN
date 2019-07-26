@@ -1,5 +1,4 @@
 import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
 import {
   createBottomTabNavigator,
   BottomTabBar,
@@ -13,7 +12,6 @@ import MyPage from '../page/MyPage'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Entypo from 'react-native-vector-icons/Entypo'
-import NavigationUtil from './NavigationUtil.js'
 
 class TabComponent extends React.Component {
   constructor(props) {
@@ -109,7 +107,6 @@ class DynamicTabNavigator extends React.Component {
   }
 
   render() {
-    NavigationUtil.navigation = this.props.navigation
     const Tabs = this._tabNavigator()
     return <Tabs />
   }
