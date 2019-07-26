@@ -12,10 +12,13 @@ import MyPage from '../page/MyPage'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Entypo from 'react-native-vector-icons/Entypo'
+import NavigationUtil from './NavigationUtil.js'
 
 class TabComponent extends React.Component {
   constructor(props) {
     super(props)
+    console.disableYellowBox = true
+    console
     this.theme = {
       tintColor: props.activeTintColor,
       updateTime: new Date().getTime()
@@ -105,11 +108,7 @@ export default class DynamicTabNavigator extends React.Component {
     console.disableYellowBox = true
   }
 
-  /**
-   * 获取动态的Tab
-   * @returns {*}
-   * @private
-   */
+  // 获取动态的Tab
   _tabNavigator() {
     let tabs = {}
     if (this.props.navigation.state.params) {
@@ -132,6 +131,7 @@ export default class DynamicTabNavigator extends React.Component {
   }
 
   render() {
+    NavigationUtil.navigation = this.props.navigation
     const Tabs = this._tabNavigator()
     return <Tabs />
   }
