@@ -5,6 +5,7 @@ import {
   BottomTabBar,
   createAppContainer
 } from 'react-navigation'
+import { connect } from 'react-redux'
 import PopularPage from '../page/PopularPage'
 import TrendingPage from '../page/TrendingPage'
 import FavoritePage from '../page/FavoritePage'
@@ -18,28 +19,9 @@ class TabComponent extends React.Component {
   constructor(props) {
     super(props)
     console.disableYellowBox = true
-    console
-    this.theme = {
-      tintColor: props.activeTintColor,
-      updateTime: new Date().getTime()
-    }
   }
-
   render() {
-    const { routes, index } = this.props.navigation.state
-    // console.log('HomePage navigation: ', this.props.navigation)
-    if (routes[index].params) {
-      const { theme } = routes[index].params
-      if (theme && theme.updateTime > this.theme.updateTime) {
-        this.theme = theme
-      }
-    }
-    return (
-      <BottomTabBar
-        {...this.props}
-        activeTintColor={this.theme.tintColor || this.props.activeTintColor}
-      />
-    )
+    return <BottomTabBar {...this.props} activeTintColor={this.props.theme} />
   }
 }
 
@@ -95,17 +77,22 @@ const tabsConfig = {
   }
 }
 
-const TabBarOptions = {
-  tabBarOptions: {
-    activeTintColor: Platform.OS === 'ios' ? '#e91e63' : 'blue'
-  },
-  tabBarComponent: TabComponent //TODO
-}
-
-export default class DynamicTabNavigator extends React.Component {
+class DynamicTabNavigator extends React.Component {
   constructor(props) {
     super(props)
     console.disableYellowBox = true
+  }
+
+  _tabBarOptions() {
+    const TabBarOptions = {
+      tabBarOptions: {
+        activeTintColor: 'blue'
+      },
+      tabBarComponent: props => (
+        <TabComponent theme={this.props.theme} {...props} />
+      )
+    }
+    return TabBarOptions
   }
 
   // 获取动态的Tab
@@ -125,9 +112,10 @@ export default class DynamicTabNavigator extends React.Component {
     } else {
       const { PopularPage, TrendingPage, FavoritePage, MyPage } = tabsConfig //根据需要定制要显示的tab
       tabs = { PopularPage, TrendingPage, FavoritePage, MyPage }
-      //Page1.navigationOptions.tabBarLabel = 'P1' //动态修改Tab的属性
     }
-    return createAppContainer(createBottomTabNavigator(tabs, TabBarOptions))
+    return createAppContainer(
+      createBottomTabNavigator(tabs, this._tabBarOptions())
+    )
   }
 
   render() {
@@ -136,3 +124,11 @@ export default class DynamicTabNavigator extends React.Component {
     return <Tabs />
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    theme: state.theme.theme
+  }
+}
+
+export default connect(mapStateToProps)(DynamicTabNavigator)

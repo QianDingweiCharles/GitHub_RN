@@ -4,7 +4,7 @@
 
 import React, { AppRegistry, View } from 'react-native'
 import { createAppContainer } from 'react-navigation'
-import AppContainer from './js/navigator/AppNavigator'
 import { name as appName } from './app.json'
+import App from './js/App.js'
 
-AppRegistry.registerComponent(appName, () => AppContainer)
+AppRegistry.registerComponent(appName, () => App)
