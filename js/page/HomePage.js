@@ -1,6 +1,10 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
-import { createBottomTabNavigator, BottomTabBar } from 'react-navigation'
+import {
+  createBottomTabNavigator,
+  BottomTabBar,
+  createAppContainer
+} from 'react-navigation'
 import PopularPage from './PopularPage.js'
 import TrendingPage from './TrendingPage.js'
 import FavoritePage from './FavoritePage.js'
@@ -8,6 +12,7 @@ import MyPage from './MyPage.js'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Entypo from 'react-native-vector-icons/Entypo'
+import NavigationUtil from '../navigator/NavigationUtil'
 
 class TabComponent extends React.Component {
   constructor(props) {
@@ -95,4 +100,16 @@ const TabBarOptions = {
   tabBarComponent: TabComponent //TODO
 }
 
-export default createBottomTabNavigator(tabsConfig, TabBarOptions)
+export default class HomePage extends React.Component {
+  _tabNavigator() {
+    return createAppContainer(
+      createBottomTabNavigator(tabsConfig, TabBarOptions)
+    )
+  }
+
+  render() {
+    NavigationUtil.navigation = this.props.navigation
+    const Tabs = this._tabNavigator()
+    return <Tabs />
+  }
+}

@@ -1,9 +1,9 @@
 export default class NavigationUtil {
   // 跳转到指定页面
   static goPage(params, page) {
-    const { navigation } = params
+    const navigation = NavigationUtil.navigation
     if (!navigation) {
-      console.log('Navigation cannot be null')
+      console.log('NavigationUtil.navigation cannot be null')
       return
     }
     navigation.navigate(page, { ...params })
