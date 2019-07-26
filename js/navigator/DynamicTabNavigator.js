@@ -97,25 +97,15 @@ class DynamicTabNavigator extends React.Component {
 
   // 获取动态的Tab
   _tabNavigator() {
-    let tabs = {}
-    if (this.props.navigation.state.params) {
-      /**
-       * 取出上一个页面传过来的要显示的tab参数，也可以是从服务端下发的的Tab的配置，
-       * 比如显示createBottomTabNavigator中的那些Tab,
-       * 这个配置页可以是在其他页面获取之后通过AsyncStorage写入到本地缓存，
-       * 然后在这里读取缓存，也可以通过其他方式如props、global config等获取
-       ***/
-      this.props.navigation.state.params.tabs.forEach(e => {
-        //根据需要定制要显示的tab
-        tabs[e] = TABS[e]
-      })
-    } else {
-      const { PopularPage, TrendingPage, FavoritePage, MyPage } = tabsConfig //根据需要定制要显示的tab
-      tabs = { PopularPage, TrendingPage, FavoritePage, MyPage }
+    if (this.Tabs) {
+      return this.Tabs
     }
-    return createAppContainer(
+    const { PopularPage, TrendingPage, FavoritePage, MyPage } = tabsConfig //根据需要定制要显示的tab
+    const tabs = { PopularPage, TrendingPage, FavoritePage, MyPage }
+
+    return (this.Tabs = createAppContainer(
       createBottomTabNavigator(tabs, this._tabBarOptions())
-    )
+    ))
   }
 
   render() {
