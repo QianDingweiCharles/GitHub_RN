@@ -6,6 +6,7 @@ import {
 import WelcomePage from '../page/WelcomePage'
 import HomePage from '../page/HomePage'
 import DetailPage from '../page/DetailPage'
+import DynamicTabNavigator from './DynamicTabNavigator'
 
 const initNavigator = createStackNavigator({
   WelcomePage: {
@@ -17,8 +18,8 @@ const initNavigator = createStackNavigator({
 })
 
 const MainNavigator = createStackNavigator({
-  HomePage: {
-    screen: HomePage,
+  DynamicTabNavigator: {
+    screen: DynamicTabNavigator,
     navigationOptions: {}
   },
   DetailPage: {
