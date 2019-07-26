@@ -72,3 +72,25 @@ const RouteConfig = {
 ## react-navigation-redux-helpers 用法
 
 参考官网： https://github.com/react-navigation/redux-helpers
+
+## 处理物理返回键
+
+```javascript
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress)
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress)
+  }
+// 必须用箭头函数
+  onBackPress = () => {
+    const { dispatch, nav } = this.props
+    if (nav.routes[1].index === 0) {
+      //如果RootNavigator中的MainNavigator的index为0，则不处理返回事件
+      return false
+    }
+    dispatch(NavigationActions.back())
+    return true
+  }
+```
