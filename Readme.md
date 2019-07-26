@@ -68,3 +68,7 @@ const RouteConfig = {
   }
 }
 ```
+
+## react-navigation-redux-helpers 用法
+
+参考官网： https://github.com/react-navigation/redux-helpers
