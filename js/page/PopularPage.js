@@ -64,6 +64,30 @@ class PopularTab4 extends React.Component {
   }
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF'
+  },
+  welcome: {
+    fontSize: 20
+  },
+  labelStyle: {
+    fontSize: 13,
+    marginTop: 6,
+    marginBottom: 6
+  },
+  indicatorStyle: {
+    height: 2,
+    backgroundColor: 'white'
+  },
+  tabStyle: {
+    minWidth: 50
+  }
+})
+
 export default createMaterialTopTabNavigator(
   {
     PopularTab1: {
@@ -93,35 +117,14 @@ export default createMaterialTopTabNavigator(
   },
   {
     tabBarOptions: {
-      tabStyle: {
-        minWidth: 50,
-        upperCaseLabel: false
-      },
+      tabStyle: styles.tabStyle,
+      upperCaseLabel: false,
       scrollEnabled: true,
       style: {
-        backgroundColor: 'blue'
+        backgroundColor: '#678'
       },
-      indicatorStyle: {
-        height: 2,
-        backgroundColor: 'white'
-      },
-      labelStyle: {
-        fontSize: 13,
-        marginTop: 6,
-        marginBottom: 6
-      }
+      indicatorStyle: styles.indicatorStyle,
+      labelStyle: styles.labelStyle
     }
   }
 )
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
-  },
-  welcome: {
-    fontSize: 20
-  }
-})
