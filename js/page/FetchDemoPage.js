@@ -14,7 +14,7 @@ export default class FetchDemoPage extends React.Component {
     }
   }
 
-  loadData2() {
+  loadData() {
     const url = `https://github.com/search?q=${this.state.searchKey}`
     fetch(url)
       .then(response => {
