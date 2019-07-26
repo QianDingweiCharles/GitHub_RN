@@ -1,11 +1,25 @@
 import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, Text, Button } from 'react-native'
 
 export default class FavoritePage extends React.Component {
   render() {
+    const { navigation } = this.props
+
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>FavoritePage</Text>
+
+        <Button
+          title="改变主题色--绿色"
+          onPress={() => {
+            navigation.setParams({
+              theme: {
+                tintColor: 'green',
+                updateTime: new Date().getTime()
+              }
+            })
+          }}
+        />
       </View>
     )
   }

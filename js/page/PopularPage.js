@@ -5,6 +5,7 @@ import NavigationUtil from '../navigator/NavigationUtil.js'
 
 class PopularTab1 extends React.Component {
   render() {
+    // const { navigation } = this.props
     return (
       <View style={styles.container}>
         <Button
@@ -16,6 +17,18 @@ class PopularTab1 extends React.Component {
           }}
           title="跳转到详情页面"
         />
+
+        {/* <Button
+          title="改变主题色--金色"
+          onPress={() => {
+            navigation.setParams({
+              theme: {
+                tintColor: 'black',
+                updateTime: new Date().getTime()
+              }
+            })
+          }}
+        /> */}
       </View>
     )
   }
