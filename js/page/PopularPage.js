@@ -66,6 +66,15 @@ class PopularTab extends React.Component {
           }}
           title="跳转到FetchDemo"
         />
+        <Button
+          onPress={() => {
+            NavigationUtil.goPage(
+              { navigation: this.props.navigation },
+              'AsyncStorageDemoPage'
+            )
+          }}
+          title="跳转到AsyncStorageDemoPage"
+        />
         {/* <Button
           title="改变主题色--金色"
           onPress={() => {
