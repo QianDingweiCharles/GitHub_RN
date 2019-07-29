@@ -17,10 +17,12 @@ export default class DataStore {
       this.fetchLocalData(url)
         .then(wrapData => {
           if (wrapData && DataStore.checkTimestampValid(wrapData.timeStamp)) {
+            console.log('old Local data:------>', wrapData)
             resolve(wrapData)
           } else {
             this.fetchNetData(url)
               .then(data => {
+                console.log('new Network data:------>', this._wrapData(data))
                 resolve(this._wrapData(data))
               })
               .catch(err => {
