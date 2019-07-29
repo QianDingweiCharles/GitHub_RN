@@ -13,6 +13,7 @@ import {
 } from 'react-navigation-redux-helpers'
 import FetchDemoPage from '../page/FetchDemoPage.js'
 import AsyncStorageDemoPage from '../page/AsyncStorageDemoPage.js'
+import DataStoreDemoPage from '../page/DataStoreDemoPage.js'
 
 export const rootCom = 'Init'
 
@@ -40,6 +41,10 @@ const MainNavigator = createStackNavigator({
   },
   AsyncStorageDemoPage: {
     screen: AsyncStorageDemoPage,
+    navigationOptions: {}
+  },
+  DataStoreDemoPage: {
+    screen: DataStoreDemoPage,
     navigationOptions: {}
   }
 })
