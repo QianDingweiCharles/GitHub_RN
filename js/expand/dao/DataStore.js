@@ -1,4 +1,5 @@
 import { AsyncStorage } from 'react-native'
+import axios from 'axios'
 
 export default class DataStore {
   static checkTimestampValid(timeStamp) {
@@ -12,33 +13,24 @@ export default class DataStore {
   }
 
   fetchData(url) {
-    console.log('fetchData1:', url)
     return new Promise((resolve, reject) => {
       this.fetchLocalData(url)
         .then(wrapData => {
-          console.log('fetchData2:', url)
           if (wrapData && DataStore.checkTimestampValid(wrapData.timeStamp)) {
-            console.log('fetchData3:', url)
             resolve(wrapData)
           } else {
-            console.log('fetchData4:', url)
             this.fetchNetData(url)
               .then(data => {
-                console.log('fetchData5:', data)
                 resolve(this._wrapData(data))
-                console.log('resolve:', url)
               })
               .catch(err => {
-                console.log('here error:', err)
                 reject(err)
               })
           }
         })
         .catch(error => {
-          console.log('fetchData6:', url)
           this.fetchNetData(url)
             .then(data => {
-              console.log('fetchData7:', url)
               resolve(this._wrapData(data))
             })
             .catch(err => {
@@ -76,25 +68,40 @@ export default class DataStore {
   }
 
   fetchNetData(url) {
-    console.log('fetchData8:', url)
-    return new Promise((resolve, reject) => {
-      fetch(url)
-        .then(response => {
-          console.log('fetchData9:', url)
-          if (response.ok) {
-            console.log('fetchData10:', url)
-            console.log('response.json()：', response)
-            return response
-          }
-          throw new Error('NetWork response was not ok')
-        })
-        .then(responseData => {
-          this.saveData(url, responseData)
-          resolve(responseData)
-        })
-        .catch(err => {
-          reject(err)
-        })
-    })
+    return axios
+      .get(url)
+      .then(response => {
+        if (response.status === 200 && response.data) {
+          return response.data
+        }
+        throw new Error('NetWork response was not ok')
+      })
+      .then(responseData => {
+        this.saveData(url, responseData)
+        return responseData
+      })
   }
+
+  //   fetchNetData(url) {
+  //     console.log('fetchData8:', url)
+  //     return new Promise((resolve, reject) => {
+  //       fetch(url)
+  //         .then(response => {
+  //           console.log('fetchData9:', url)
+  //           if (response.ok) {
+  //             console.log('fetchData10:', url)
+  //             console.log('response.json()：', response)
+  //             return response
+  //           }
+  //           throw new Error('NetWork response was not ok')
+  //         })
+  //         .then(responseData => {
+  //           this.saveData(url, responseData)
+  //           resolve(responseData)
+  //         })
+  //         .catch(err => {
+  //           reject(err)
+  //         })
+  //     })
+  //   }
 }
