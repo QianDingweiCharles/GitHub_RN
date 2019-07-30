@@ -15,7 +15,7 @@ const defaultState = {}
 export default function onAction(state = defaultState, action) {
   console.log("reducer:----->", action)
   switch (action.type) {
-    case types.LOAD_POPULAR_SUCCESS:
+    case types.POPULAR_REFRESH_SUCCESS:
       console.log("reducer2:----->", action)
       return {
         ...state,
@@ -30,7 +30,7 @@ export default function onAction(state = defaultState, action) {
         ...state,
         isLoading: true
       }
-    case types.LOAD_POPULAR_FAIL:
+    case types.POPULAR_REFRESH_FAIL:
       return {
         ...state,
         ...state[action.storeName],

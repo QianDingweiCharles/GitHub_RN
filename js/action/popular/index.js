@@ -13,14 +13,14 @@ export function onLoadPopularData(storeName, url) {
       })
       .catch(err => {
         console.log('Error in pupular.js:', err)
-        dispatch({ type: Types.LOAD_POPULAR_FAIL, storeName, err })
+        dispatch({ type: Types.POPULAR_REFRESH_FAIL, storeName, err })
       })
   }
 }
 
 function handleData(dispatch, storeName, data) {
   dispatch({
-    type: Types.LOAD_POPULAR_SUCCESS,
+    type: Types.POPULAR_REFRESH_SUCCESS,
     items: data && data.data && data.data.items,
     storeName
   })
