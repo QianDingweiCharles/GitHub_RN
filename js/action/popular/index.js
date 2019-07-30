@@ -8,6 +8,7 @@ export function onLoadPopularData(storeName, url) {
     dataStore
       .fetchData(url)
       .then(data => {
+        console.log('a------>', data)
         handleData(dispatch, storeName, data)
       })
       .catch(err => {

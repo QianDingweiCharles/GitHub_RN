@@ -16,5 +16,6 @@ const index = combineReducers({
   theme,
   popular
 })
+console.log("index---------->", index)
 
 export default index

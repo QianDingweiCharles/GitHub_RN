@@ -7,6 +7,44 @@ class MyPage extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text>Popular</Text>
+        {/* <Text>{tabLabel}</Text> */}
+        <Button
+          onPress={() => {
+            NavigationUtil.goPage(
+              { navigation: this.props.navigation },
+              'DetailPage'
+            )
+          }}
+          title="跳转到详情页面"
+        />
+        <Button
+          onPress={() => {
+            NavigationUtil.goPage(
+              { navigation: this.props.navigation },
+              'FetchDemoPage'
+            )
+          }}
+          title="跳转到FetchDemo"
+        />
+        <Button
+          onPress={() => {
+            NavigationUtil.goPage(
+              { navigation: this.props.navigation },
+              'DataStoreDemoPage'
+            )
+          }}
+          title="跳转到AsyncStorageDemoPage"
+        />
+        <Button
+          onPress={() => {
+            NavigationUtil.goPage(
+              { navigation: this.props.navigation },
+              'DataStoreDemoPage'
+            )
+          }}
+          title="离线缓存框架"
+        />
         <Text style={styles.welcome}>MyPage</Text>
         <Button
           title="改变主题色---黄色"

@@ -13,8 +13,10 @@ import types from '../../action/types'
 // }
 const defaultState = {}
 export default function onAction(state = defaultState, action) {
+  console.log("reducer:----->", action)
   switch (action.type) {
     case types.LOAD_POPULAR_SUCCESS:
+      console.log("reducer2:----->", action)
       return {
         ...state,
         [action.storeName]: {
