@@ -14,6 +14,7 @@ import {
 import { connect } from 'react-redux'
 import actions from '../action'
 import NavigationUtil from '../navigator/NavigationUtil.js'
+import PopularItem from '../common/popularItem'
 
 const URL = 'https://api.github.com/search/repositories?q='
 const QUERY_STR = '&sort=stars'
@@ -77,9 +78,10 @@ class PopularTab extends React.Component {
 
   renderItem = ({ item }) => {
     return (
-      <View style={{ marginBottom: 10 }}>
-        <Text style={{ backgroundColor: 'red' }}>{JSON.stringify(item)}</Text>
-      </View>
+      <PopularItem
+        item={item}
+        onSelect={() => { }}
+      />
     )
   }
 
@@ -114,7 +116,9 @@ class PopularTab extends React.Component {
     )
   }
 }
+
 const mapStateToProps = state => {
+  console.log("state.pupular:", state.popular)
   return {
     popular: state.popular
   }
