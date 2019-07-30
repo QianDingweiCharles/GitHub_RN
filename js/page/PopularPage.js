@@ -76,11 +76,9 @@ class PopularTab extends React.Component {
   }
 
   renderItem = ({ item }) => {
-    console.log("renderItem:", item)
-    // const item = data.item
     return (
       <View style={{ marginBottom: 10 }}>
-        <Text style={{ backgroundColor: red }}>{JSON.stringify(item)}</Text>
+        <Text style={{ backgroundColor: 'red' }}>{JSON.stringify(item)}</Text>
       </View>
     )
   }
@@ -116,9 +114,11 @@ class PopularTab extends React.Component {
     )
   }
 }
-const mapStateToProps = state => ({
-  popular: state.popular
-})
+const mapStateToProps = state => {
+  return {
+    popular: state.popular
+  }
+}
 
 const mapDispatchToProps = dispatch => {
   return {
