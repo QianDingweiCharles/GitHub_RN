@@ -1,27 +1,60 @@
 import Types from '../types'
 import DataStore from '../../expand/dao/DataStore'
+import types from '../types';
 
-export function onLoadPopularData(storeName, url) {
+export function onRefreshPopular(storeName, url, pageSize) {
   return dispatch => {
     dispatch({ type: Types.POPULAR_REFRESH, storeName })
     let dataStore = new DataStore()
     dataStore
       .fetchData(url)
       .then(data => {
-        console.log('a------>', data)
-        handleData(dispatch, storeName, data)
+        handleData(dispatch, storeName, data, pageSize)
       })
       .catch(err => {
-        console.log('Error in pupular.js:', err)
         dispatch({ type: Types.POPULAR_REFRESH_FAIL, storeName, err })
       })
   }
 }
 
-function handleData(dispatch, storeName, data) {
+export function onLoadMorePopular(storeName, pageIndex, pageSize, dataArray = [], callBack) {
+  const dataLength = dataArray.length
+  return dispatch => {
+    setTimeout(() => {
+      if ((pageIndex - 1) * pageSize >= dataLength) {
+        if (typeof callBack === 'function') {
+          callBack('no moreData')
+        }
+        dispatch({
+          type: types.POPULAR_LOAD_MORE_FAIL,
+          error: 'no more',
+          storeName: storeName,
+          pageIndex: --pageIndex,
+          projectModes: dataArray
+        })
+      } else {
+        let max = pageIndex * pageSize > dataLength ? dataLength : pageIndex * pageSize
+        dispatch({
+          type: types.POPULAR_LOAD_MORE_SUCCESS,
+          storeName,
+          pageIndex,
+          projectModes: dataArray.slice(0, max)
+        })
+      }
+    }, 200)
+  }
+}
+
+function handleData(dispatch, storeName, data, pageSize) {
+  let fixItems = []
+  if (data && data.data && data.data.items) {
+    fixItems = data.data.items
+  }
   dispatch({
     type: Types.POPULAR_REFRESH_SUCCESS,
-    items: data && data.data && data.data.items,
-    storeName
+    items: fixItems,
+    projectModes: pageSize > fixItems.length ? fixItems : fixItems.slice(0, pageSize),
+    storeName,
+    pageIndex: 1
   })
 }
