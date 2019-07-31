@@ -1,13 +1,12 @@
-import Types from '../types'
-import DataStore from '../../expand/dao/DataStore'
 import types from '../types'
+import DataStore from '../../expand/dao/DataStore'
 import { FLAG_STORAGE } from '../../expand/dao/DataStore'
 import { handleData } from '../util'
 
 
 export function onRefreshPopular(storeName, url, pageSize) {
   return dispatch => {
-    dispatch({ type: Types.POPULAR_REFRESH, storeName })
+    dispatch({ type: types.POPULAR_REFRESH, storeName })
     let dataStore = new DataStore()
     dataStore
       .fetchData(url, FLAG_STORAGE.flag_popular)
@@ -15,7 +14,7 @@ export function onRefreshPopular(storeName, url, pageSize) {
         handleData(types.POPULAR_REFRESH_SUCCESS, dispatch, storeName, data, pageSize)
       })
       .catch(err => {
-        dispatch({ type: Types.POPULAR_REFRESH_FAIL, storeName, err })
+        dispatch({ type: types.POPULAR_REFRESH_FAIL, storeName, err })
       })
   }
 }
