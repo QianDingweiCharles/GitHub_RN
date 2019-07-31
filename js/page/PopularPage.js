@@ -130,7 +130,7 @@ class PopularTab extends React.Component {
 
   render() {
     let store = this._store()
-    console.log("store.projectModes:", store.projectModes)
+    console.log("popularpage: store.projectModes", store.projectModes)
     return (
       <View style={styles.container}>
         <FlatList
@@ -168,7 +168,6 @@ class PopularTab extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log("state.pupular:", state.popular)
   return {
     popular: state.popular
   }

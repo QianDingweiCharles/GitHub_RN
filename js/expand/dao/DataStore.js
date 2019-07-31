@@ -1,5 +1,11 @@
 import { AsyncStorage } from 'react-native'
 import axios from 'axios'
+import GitHubTrending from 'GitHubTrending'
+
+export const FLAG_STORAGE = {
+  flag_popular: 'popular',
+  flag_trending: 'trending'
+}
 
 export default class DataStore {
   static checkTimestampValid(timeStamp) {
@@ -12,7 +18,7 @@ export default class DataStore {
     return true
   }
 
-  fetchData(url) {
+  fetchData(url, flag) {
     return new Promise((resolve, reject) => {
       this.fetchLocalData(url)
         .then(wrapData => {
@@ -20,7 +26,7 @@ export default class DataStore {
             console.log('old Local data:------>', wrapData)
             resolve(wrapData)
           } else {
-            this.fetchNetData(url)
+            this.fetchNetData(url, flag)
               .then(data => {
                 console.log('new Network data:------>', this._wrapData(data))
                 resolve(this._wrapData(data))
@@ -31,7 +37,7 @@ export default class DataStore {
           }
         })
         .catch(error => {
-          this.fetchNetData(url)
+          this.fetchNetData(url, flag)
             .then(data => {
               resolve(this._wrapData(data))
             })
@@ -69,19 +75,33 @@ export default class DataStore {
     })
   }
 
-  fetchNetData(url) {
-    return axios
-      .get(url)
-      .then(response => {
-        if (response.status === 200 && response.data) {
-          return response.data
-        }
-        throw new Error('NetWork response was not ok')
-      })
-      .then(responseData => {
-        this.saveData(url, responseData)
-        return responseData
-      })
+  fetchNetData(url, flag) {
+    if (flag !== FLAG_STORAGE.flag_trending) {
+      return axios
+        .get(url)
+        .then(response => {
+          if (response.status === 200 && response.data) {
+            return response.data
+          }
+          throw new Error('NetWork response was not ok')
+        })
+        .then(responseData => {
+          this.saveData(url, responseData)
+          return responseData
+        })
+    } else {
+      new GitHubTrending().fetchTrending(url)
+        .then((items) => {
+          if (!items) {
+            throw new Error('resopnse is null')
+          }
+          this.saveData(url, items)
+          return items
+        }).catch((error) => {
+          console.log("GitHubTrending Error", error)
+        });
+    }
+
   }
 
   //   fetchNetData(url) {
