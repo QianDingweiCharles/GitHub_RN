@@ -6,7 +6,8 @@ import {
   FlatList,
   RefreshControl,
   ActivityIndicator,
-  TouchableOpacity
+  TouchableOpacity,
+  DeviceEventEmitter
 } from 'react-native'
 import {
   createMaterialTopTabNavigator,
@@ -23,6 +24,7 @@ import TrendingDialog, { TimeSpans } from '../common/TrendingDialog'
 const URL = 'https://github.com/trending/'
 const TITLE_COLOR = '#678'
 const PAGE_SIZE = 10
+const EVENT_TYPE_TIME_SPAN_CHANGE = 'EVENT_TYPE_TIME_SPAN_CHANGE'
 
 export default class TrendingPage extends React.Component {
   constructor(props) {
@@ -46,10 +48,14 @@ export default class TrendingPage extends React.Component {
     return tabs
   }
 
+  // 优化效率:根据需要选择是否重新创建Tabnavigator
   _tabNavigator() {
-    return createAppContainer(
-      createMaterialTopTabNavigator(this._genTabs(), TabNavigatorConfig)
-    )
+    if (!this.tabNav) {
+      this.tabNav = createAppContainer(
+        createMaterialTopTabNavigator(this._genTabs(), TabNavigatorConfig)
+      )
+    }
+    return this.tabNav
   }
 
   renderTitleView = () => {
@@ -80,6 +86,7 @@ export default class TrendingPage extends React.Component {
     this.setState({
       timeSpan: tab
     })
+    DeviceEventEmitter.emit(EVENT_TYPE_TIME_SPAN_CHANGE, tab)
   }
 
   renderTendingDialog = () => {
@@ -124,6 +131,16 @@ class TrendingTab extends React.Component {
 
   componentDidMount() {
     this.loadData()
+    this.timeSpanChangeListener = DeviceEventEmitter.addListener(EVENT_TYPE_TIME_SPAN_CHANGE, (timeSpan) => {
+      this.timeSpan = timeSpan
+      this.loadData()
+    })
+  }
+
+  componentWillMount() {
+    if (this.timeSpanChangeListener) {
+      this.timeSpanChangeListener.remove()
+    }
   }
 
   loadData = (loadMore) => {
