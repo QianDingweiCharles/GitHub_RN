@@ -13,7 +13,6 @@ import {
 } from 'react-navigation'
 import { connect } from 'react-redux'
 import Toast from 'react-native-easy-toast'
-import { DeviceInfo } from 'react-native'
 import actions from '../action'
 import PopularItem from '../common/popularItem'
 import NavigationBar from '../common//NavigationBar'

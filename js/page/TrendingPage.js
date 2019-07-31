@@ -5,7 +5,8 @@ import {
   Text,
   FlatList,
   RefreshControl,
-  ActivityIndicator
+  ActivityIndicator,
+  TouchableOpacity
 } from 'react-native'
 import {
   createMaterialTopTabNavigator,
@@ -13,9 +14,11 @@ import {
 } from 'react-navigation'
 import { connect } from 'react-redux'
 import Toast from 'react-native-easy-toast'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import actions from '../action'
 import NavigationBar from '../common//NavigationBar'
 import TrendingItem from '../common/trendingItem'
+import TrendingDialog, { TimeSpans } from '../common/TrendingDialog'
 
 const URL = 'https://github.com/trending/'
 const TITLE_COLOR = '#678'
@@ -25,13 +28,16 @@ export default class TrendingPage extends React.Component {
   constructor(props) {
     super(props)
     this.tabNames = ['All', 'C', 'C#', 'PHP', 'Javascript']
+    this.state = {
+      timeSpan: TimeSpans[0]
+    }
   }
 
   _genTabs() {
     const tabs = {}
     this.tabNames.forEach((item, index) => {
       tabs[`tab${index}`] = {
-        screen: props => <TrendingTabPage {...props} tabLabel={item} />,
+        screen: props => <TrendingTabPage {...props} timeSpan={this.state.timeSpan} tabLabel={item} />,
         navigationOptions: {
           tabBarLabel: item
         }
@@ -46,21 +52,63 @@ export default class TrendingPage extends React.Component {
     )
   }
 
+  renderTitleView = () => {
+    return (
+      <View>
+        <TouchableOpacity
+          ref='button'
+          underlayColor='transparent'
+          onPress={() => this.dialog.show()}
+        >
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Text style={{ fontSize: 18, color: '#FFFFFF', fontWeight: '400' }}>
+              趋势{this.state.timeSpan.showText}
+            </Text>
+            <MaterialIcons
+              name={'arrow-drop-down'}
+              size={22}
+              style={{ color: 'white' }}
+            />
+          </View>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+
+  onSelectTimeSpan = (tab) => {
+    this.dialog.dismiss();
+    this.setState({
+      timeSpan: tab
+    })
+  }
+
+  renderTendingDialog = () => {
+    return (
+      <TrendingDialog
+        ref={dialog => this.dialog = dialog}
+        onSelect={tab => this.onSelectTimeSpan(tab)}
+      />
+    )
+  }
+
   render() {
     let statusBar = {
       backgroundColor: TITLE_COLOR,
       barStyle: 'light-content'
     }
-    let navigationBar = <NavigationBar
-      title='趋势'
-      style={statusBar}
-      style={{ backgroundColor: TITLE_COLOR, }}
-    />
+    let navigationBar = (
+      <NavigationBar
+        titleView={this.renderTitleView()}
+        style={statusBar}
+        style={{ backgroundColor: TITLE_COLOR, }}
+      />
+    )
     const TabNavigator = this._tabNavigator()
     return (
       <View style={{ flex: 1, marginTop: 0 }}>
         {navigationBar}
         <TabNavigator />
+        {this.renderTendingDialog()}
       </View>
     )
   }
@@ -69,8 +117,9 @@ export default class TrendingPage extends React.Component {
 class TrendingTab extends React.Component {
   constructor(props) {
     super(props)
-    const { tabLabel } = this.props
+    const { tabLabel, timeSpan } = this.props
     this.storeName = tabLabel
+    this.timeSpan = timeSpan
   }
 
   componentDidMount() {
@@ -106,9 +155,9 @@ class TrendingTab extends React.Component {
 
   genFetchUrl = key => {
     if (key !== 'All') {
-      return URL + key + '?since=daily'
+      return URL + key + '?' + this.timeSpan.searchText
     } else {
-      return URL + '?since=daily'
+      return URL + '?' + this.timeSpan.searchText
     }
   }
 
@@ -133,7 +182,6 @@ class TrendingTab extends React.Component {
 
   render() {
     let store = this._store()
-    console.log("store.projectModesTrending->>>>>>>>>>>>>>>>:", store.projectModes)
     return (
       <View style={styles.container}>
         <FlatList

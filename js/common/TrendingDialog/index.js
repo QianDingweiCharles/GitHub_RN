@@ -10,14 +10,19 @@ export const TimeSpans = [
 ]
 
 export default class TrendingDialog extends Component {
-	state = {
-		visible: false
+	constructor(props) {
+		super(props)
+		this.state = {
+			visible: false
+		}
 	}
+
 	show = () => {
 		this.setState({
 			visible: true
 		})
 	}
+
 	dismiss = () => {
 		this.setState({
 			visible: false
@@ -33,7 +38,7 @@ export default class TrendingDialog extends Component {
 				onRequestClose={() => onClose()}
 			>
 				<TouchableOpacity
-					style={StyleSheet.container}
+					style={styles.container}
 					onPress={() => { this.dismiss() }}
 				>
 					<MaterialIcons
@@ -45,13 +50,15 @@ export default class TrendingDialog extends Component {
 						{TimeSpans.map((item, i, arr) => {
 							return (
 								<TouchableOpacity
-									onPress={() => onSelect(arr[i])}
+									onPress={() => {
+										onSelect(arr[i])
+									}}
 									underlayColor='transparent'
 								>
 									<View style={styles.text_container}>
 										<Text style={styles.Text}>{arr[i].showText}</Text>
-										{i !== arr.length - 1 ? <View style={styles.line} /> : null}
 									</View>
+									{i !== arr.length - 1 ? <View style={styles.line} /> : null}
 								</TouchableOpacity>
 							)
 						})}
@@ -64,7 +71,7 @@ export default class TrendingDialog extends Component {
 
 const styles = StyleSheet.create({
 	container: {
-		backgroundColor: 'rgba(0,0,0,0.6)',
+		backgroundColor: 'rgba(0, 0, 0, 0.6)',
 		flex: 1,
 		alignItems: 'center'
 	},
@@ -94,7 +101,7 @@ const styles = StyleSheet.create({
 		paddingRight: 26
 	},
 	line: {
-		height: 0.3,
+		height: 1,
 		backgroundColor: 'darkgray'
 	}
 })
