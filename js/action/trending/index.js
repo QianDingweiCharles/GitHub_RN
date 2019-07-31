@@ -14,7 +14,7 @@ export function onRefreshTrending(storeName, url, pageSize) {
                 handleData(Types.TRENDING_REFRESH_SUCCESS, dispatch, storeName, data, pageSize)
             })
             .catch(err => {
-                dispatch({ type: Types.Trending_REFRESH_FAIL, storeName, err })
+                dispatch({ type: Types.TRENDING_REFRESH_FAIL, storeName, err })
             })
     }
 }
@@ -28,7 +28,7 @@ export function onLoadMoreTrending(storeName, pageIndex, pageSize, dataArray = [
                     callBack('no moreData')
                 }
                 dispatch({
-                    type: Types.Trending_LOAD_MORE_FAIL,
+                    type: Types.TRENDING_LOAD_MORE_FAIL,
                     error: 'no more',
                     storeName: storeName,
                     pageIndex: --pageIndex,
@@ -37,7 +37,7 @@ export function onLoadMoreTrending(storeName, pageIndex, pageSize, dataArray = [
             } else {
                 let max = pageIndex * pageSize > dataLength ? dataLength : pageIndex * pageSize
                 dispatch({
-                    type: Types.Trending_LOAD_MORE_SUCCESS,
+                    type: Types.TRENDING_LOAD_MORE_SUCCESS,
                     storeName,
                     pageIndex,
                     projectModes: dataArray.slice(0, max)

@@ -1,4 +1,4 @@
-import types from '../../action/types'
+import Types from '../../action/types'
 
 // store树:
 // pupular: {
@@ -14,7 +14,8 @@ import types from '../../action/types'
 const defaultState = {}
 export default function onAction(state = defaultState, action) {
   switch (action.type) {
-    case types.TRENDING_REFRESH_SUCCESS: // 下拉刷新成功
+    case Types.TRENDING_REFRESH_SUCCESS: // 下拉刷新成功
+      console.log("Reducer here 1------------>")
       return {
         ...state,
         [action.storeName]: {
@@ -26,19 +27,25 @@ export default function onAction(state = defaultState, action) {
           pageIndex: action.pageIndex
         }
       }
-    case types.TRENDING_REFRESH: // 下拉刷新
+    case Types.TRENDING_REFRESH: // 下拉刷新
+      console.log("Reducer here 1------------>")
+
       return {
         ...state,
         isLoading: true,
         hideLoadingMore: false,
       }
-    case types.TRENDING_REFRESH_FAIL: //下拉刷新失败
+    case Types.TRENDING_REFRESH_FAIL: //下拉刷新失败
+      console.log("Reducer here 1------------>")
+
       return {
         ...state,
         ...state[action.storeName],
         isLoading: false
       }
-    case types.TRENDING_LOAD_MORE_SUCCESS:
+    case Types.TRENDING_LOAD_MORE_SUCCESS:
+      console.log("Reducer here 1------------>")
+
       return {
         ...state,
         [action.storeName]: {
@@ -48,7 +55,9 @@ export default function onAction(state = defaultState, action) {
           pageIndex: action.pageIndex
         }
       }
-    case types.TRENDING_LOAD_MORE_FAIL: //下拉刷新失败
+    case Types.TRENDING_LOAD_MORE_FAIL: //下拉刷新失败
+      console.log("Reducer here 1------------>")
+
       return {
         ...state,
         [action.storeName]: {

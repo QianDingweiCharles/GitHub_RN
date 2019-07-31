@@ -19,12 +19,10 @@ export default class TrendingItem extends React.Component {
                 />
             </TouchableOpacity>
         if (!item) return null
-        console.log("item:---------------here>", item)
         return (
             <TouchableOpacity onPress={onSelect}>
                 <View style={styles.cell_container}>
                     <Text style={styles.title}>
-                        {console.log("inner fullname:------", item.fullName)}
                         {item.fullName}
                     </Text>
                     <Text style={styles.description}>

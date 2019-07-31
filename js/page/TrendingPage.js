@@ -70,7 +70,7 @@ const PAGE_SIZE = 10
 export default class TrendingPage extends React.Component {
   constructor(props) {
     super(props)
-    this.tabNames = ['All', 'C', 'C#', 'PHP', 'Javascript']
+    this.tabNames = ['C', 'C#', 'PHP', 'Javascript']
   }
 
   _genTabs() {
@@ -182,29 +182,29 @@ class TrendingTab extends React.Component {
           data={store.projectModes}
           renderItem={this.renderItem}
           keyExtractor={item => '' + (item.fullName)}
-        // refreshControl={
-        //   <RefreshControl
-        //     title={'Loading'}
-        //     titleColor={TITLE_COLOR}
-        //     colors={[TITLE_COLOR]}
-        //     refreshing={store.isLoading}
-        //     onRefresh={() => this.loadData()}
-        //     tintColor={TITLE_COLOR}
-        //   />
-        // }
-        // ListFooterComponent={() => this.genIndicator()}
-        // onEndReached={() => { // onMomentumScrollBegin一定要保证在onEndReached调用然后通过canLoadMore避免初始化时页面canLoadMore调用两次
-        //   setTimeout(() => {
-        //     if (this.canLoadMore) {
-        //       this.loadData(true)
-        //       this.canLoadMore = false
-        //     }
-        //   }, 100);
-        // }}
-        // onEndReachedThreshold={0.5}
-        // onMomentumScrollBegin={() => {
-        //   this.canLoadMore = true
-        // }}
+          refreshControl={
+            <RefreshControl
+              title={'Loading'}
+              titleColor={TITLE_COLOR}
+              colors={[TITLE_COLOR]}
+              refreshing={store.isLoading}
+              onRefresh={() => this.loadData()}
+              tintColor={TITLE_COLOR}
+            />
+          }
+          ListFooterComponent={() => this.genIndicator()}
+          onEndReached={() => { // onMomentumScrollBegin一定要保证在onEndReached调用然后通过canLoadMore避免初始化时页面canLoadMore调用两次
+            setTimeout(() => {
+              if (this.canLoadMore) {
+                this.loadData(true)
+                this.canLoadMore = false
+              }
+            }, 100);
+          }}
+          onEndReachedThreshold={0.5}
+          onMomentumScrollBegin={() => {
+            this.canLoadMore = true
+          }}
         />
         <Toast ref={'toast'} position={'center'} />
       </View>
