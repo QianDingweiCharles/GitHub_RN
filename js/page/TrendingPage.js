@@ -246,15 +246,15 @@ const styles = StyleSheet.create({
   },
   labelStyle: {
     fontSize: 13,
-    marginTop: 6,
-    marginBottom: 6
+    margin: 0
   },
   indicatorStyle: {
     height: 2,
     backgroundColor: 'white'
   },
   tabStyle: {
-    minWidth: 50
+    // minWidth: 50s
+    padding: 0
   },
   indicator: {
     color: 'red',
@@ -269,7 +269,8 @@ const TabNavigatorConfig = {
     upperCaseLabel: false,
     scrollEnabled: true,
     style: {
-      backgroundColor: '#678'
+      backgroundColor: '#678',
+      height: 30
     },
     indicatorStyle: styles.indicatorStyle,
     labelStyle: styles.labelStyle

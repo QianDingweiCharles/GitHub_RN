@@ -94,3 +94,51 @@ const RouteConfig = {
     return true
   }
 ```
+
+## TabBar初次渲染闪烁
+
+```javascript
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF'
+  },
+  welcome: {
+    fontSize: 20
+  },
+  labelStyle: {
+    fontSize: 13,
+    margin: 0
+  },
+  indicatorStyle: {
+    height: 2,
+    backgroundColor: 'white'
+  },
+  tabStyle: {
+    // minWidth: 50// minWidth会导致tabStyle初次加载的时候会有闪烁
+    padding: 0
+  },
+  indicator: {
+    color: 'red',
+    margin: 10
+  }
+
+})
+
+const TabNavigatorConfig = {
+  tabBarOptions: {
+    tabStyle: styles.tabStyle,
+    upperCaseLabel: false,
+    scrollEnabled: true,
+    style: {
+      backgroundColor: '#678',
+      height: 30 // minWidth会导致tabStyle初次加载的时候会有闪烁
+    },
+    indicatorStyle: styles.indicatorStyle,
+    labelStyle: styles.labelStyle
+  }
+}
+
+```

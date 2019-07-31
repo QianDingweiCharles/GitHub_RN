@@ -4,6 +4,7 @@ import {
   BottomTabBar,
   createAppContainer
 } from 'react-navigation'
+import { DeviceInfo } from 'react-native'
 import { connect } from 'react-redux'
 import PopularPage from '../page/PopularPage'
 import TrendingPage from '../page/TrendingPage'

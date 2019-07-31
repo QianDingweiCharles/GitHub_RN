@@ -13,6 +13,7 @@ import {
 } from 'react-navigation'
 import { connect } from 'react-redux'
 import Toast from 'react-native-easy-toast'
+import { DeviceInfo } from 'react-native'
 import actions from '../action'
 import PopularItem from '../common/popularItem'
 import NavigationBar from '../common//NavigationBar'
@@ -200,15 +201,15 @@ const styles = StyleSheet.create({
   },
   labelStyle: {
     fontSize: 13,
-    marginTop: 6,
-    marginBottom: 6
+    margin: 0
   },
   indicatorStyle: {
     height: 2,
     backgroundColor: 'white'
   },
   tabStyle: {
-    minWidth: 50
+    // minWidth: 50// minWidth会导致tabStyle初次加载的时候会有闪烁
+    padding: 0
   },
   indicator: {
     color: 'red',
@@ -223,7 +224,8 @@ const TabNavigatorConfig = {
     upperCaseLabel: false,
     scrollEnabled: true,
     style: {
-      backgroundColor: '#678'
+      backgroundColor: '#678',
+      height: 30 // minWidth会导致tabStyle初次加载的时候会有闪烁
     },
     indicatorStyle: styles.indicatorStyle,
     labelStyle: styles.labelStyle

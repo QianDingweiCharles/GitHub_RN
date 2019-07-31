@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native'
+import HTMLView from 'react-native-htmlview'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 
@@ -19,12 +20,20 @@ export default class TrendingItem extends React.Component {
                 />
             </TouchableOpacity>
         if (!item) return null
+        let description='<p>' + item.description + '</p>'
         return (
             <TouchableOpacity onPress={onSelect}>
                 <View style={styles.cell_container}>
                     <Text style={styles.title}>
                         {item.fullName}
                     </Text>
+                    <HTMLView
+                        value={description}
+                        stylesheet={{
+                            p: styles.description,
+                            a: styles.description
+                        }}
+                    />
                     <Text style={styles.description}>
                         {item.meta}
                     </Text>
@@ -42,10 +51,10 @@ export default class TrendingItem extends React.Component {
                             })}
                             
                         </View>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             <Text>Star:</Text>
                             <Text>{item.starCount}</Text>
-                        </View>
+                        </View> */}
                         {favoriteButton}
                     </View>
                 </View>
