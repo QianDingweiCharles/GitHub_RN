@@ -4,7 +4,8 @@ import { WebView } from 'react-native-webview'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import NavigationBar from '../common/NavigationBar'
 import ViewUtil from '../util'
-import NavigationUtil from '../navigator/NavigationUtil';
+import NavigationUtil from '../navigator/NavigationUtil'
+// import BackPressComponent from '../common/BackPressComponent'
 
 const TRENDINF_URL = 'https://github.com/'
 const THEME_COLOR = '#678'
@@ -22,6 +23,20 @@ export default class DetailPage extends React.Component {
       url: this.url,
       canGoBack: true
     }
+    // this.backPress = new BackPressComponent({backPress: () => this.onBackPress()})
+  }
+
+  componentDidMount() {
+    // this.backPress.componentDidMount()
+  }
+
+  componentWillUnmount() {
+    // this.backPress.componentWillUnmount()
+  }
+
+  onBackPress = () => {
+    this.onBack();
+    return true
   }
 
   renderRightButton = () => {
@@ -58,12 +73,16 @@ export default class DetailPage extends React.Component {
   }
 
   render() {
-    let navigationBar = <NavigationBar
-      title={this.state.title}
-      style={{ backgroundColor: THEME_COLOR, }}
-      leftButton={ViewUtil.getLeftBackButton(() => { this.onBack() })}
-      rightButton={this.renderRightButton()}
-    />
+    const titleLayoutStyle = this.state.title.length> 20 ? {paddingRight: 30}: null
+    let navigationBar = (
+      <NavigationBar
+        title={this.state.title}
+        titleLayoutStyle={titleLayoutStyle}
+        style={{ backgroundColor: THEME_COLOR, }}
+        leftButton={ViewUtil.getLeftBackButton(() => { this.onBack() })}
+        rightButton={this.renderRightButton()}
+      />
+    )
     return (
       <View style={styles.container}>
         {navigationBar}
@@ -81,11 +100,5 @@ export default class DetailPage extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
-  },
-  welcome: {
-    fontSize: 20
   }
 })
