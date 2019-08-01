@@ -5,7 +5,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import NavigationBar from '../common/NavigationBar'
 import ViewUtil from '../util'
 import NavigationUtil from '../navigator/NavigationUtil'
-// import BackPressComponent from '../common/BackPressComponent'
+import BackPressComponent from '../common/BackPressComponent'
 
 const TRENDINF_URL = 'https://github.com/'
 const THEME_COLOR = '#678'
@@ -23,15 +23,15 @@ export default class DetailPage extends React.Component {
       url: this.url,
       canGoBack: true
     }
-    // this.backPress = new BackPressComponent({backPress: () => this.onBackPress()})
+    this.backPress = new BackPressComponent({backPress: () => this.onBackPress()})
   }
 
   componentDidMount() {
-    // this.backPress.componentDidMount()
+    this.backPress.componentDidMount()
   }
 
   componentWillUnmount() {
-    // this.backPress.componentWillUnmount()
+    this.backPress.componentWillUnmount()
   }
 
   onBackPress = () => {

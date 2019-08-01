@@ -20,6 +20,7 @@ import actions from '../action'
 import NavigationBar from '../common//NavigationBar'
 import TrendingItem from '../common/trendingItem'
 import TrendingDialog, { TimeSpans } from '../common/TrendingDialog'
+import NavigationUtil from '../navigator/NavigationUtil'
 
 const URL = 'https://github.com/trending/'
 const TITLE_COLOR = '#678'
@@ -182,7 +183,11 @@ class TrendingTab extends React.Component {
     return (
       <TrendingItem
         item={item}
-        onSelect={() => { }}
+        onSelect={() => { 
+          NavigationUtil.goPage({
+            projectModel: item
+          }, 'DetailPage')
+        }}
       />
     )
   }
