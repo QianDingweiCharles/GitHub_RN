@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
-// import { WebView } from 'react-native-webview'
+import { WebView } from 'react-native-webview'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import NavigationBar from '../common/NavigationBar'
 import ViewUtil from '../util'

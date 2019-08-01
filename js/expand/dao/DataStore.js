@@ -8,7 +8,7 @@ export const FLAG_STORAGE = {
 }
 
 export default class DataStore {
-  static checkTimestampValid(timeStamp) {
+  static checkTimestampValid (timeStamp) {
     const currentDate = new Date()
     const targetDate = new Date()
     targetDate.setTime(timeStamp)
@@ -18,7 +18,7 @@ export default class DataStore {
     return true
   }
 
-  fetchData(url, flag) {
+  fetchData (url, flag) {
     return new Promise((resolve, reject) => {
       this.fetchLocalData(url)
         .then(wrapData => {
@@ -36,7 +36,7 @@ export default class DataStore {
               })
           }
         })
-        .catch(error => {
+        .catch(() => {
           this.fetchNetData(url, flag)
             .then(data => {
               resolve(this._wrapData(data))
@@ -48,16 +48,16 @@ export default class DataStore {
     })
   }
 
-  saveData(url, data, callBack) {
+  saveData (url, data, callBack) {
     if (!data || !url) return
     AsyncStorage.setItem(url, JSON.stringify(this._wrapData(data)), callBack)
   }
 
-  _wrapData(data) {
+  _wrapData (data) {
     return { data, timeStamp: new Date().getTime() }
   }
 
-  fetchLocalData(url) {
+  fetchLocalData (url) {
     return new Promise((resolve, reject) => {
       AsyncStorage.getItem(url, (error, result) => {
         if (!error) {
@@ -75,7 +75,7 @@ export default class DataStore {
     })
   }
 
-  fetchNetData(url, flag) {
+  fetchNetData (url, flag) {
     if (flag !== FLAG_STORAGE.flag_trending) {
       return axios
         .get(url)
@@ -98,10 +98,9 @@ export default class DataStore {
           this.saveData(url, items)
           return items
         }).catch((error) => {
-          console.log("GitHubTrending Error", error)
-        });
+          console.log('GitHubTrending Error', error)
+        })
     }
-
   }
 
   //   fetchNetData(url) {

@@ -1,13 +1,12 @@
 import types from '../types'
-import DataStore from '../../expand/dao/DataStore'
-import { FLAG_STORAGE } from '../../expand/dao/DataStore'
+import DataStore, { FLAG_STORAGE } from '../../expand/dao/DataStore'
+
 import { handleData } from '../util'
 
-
-export function onRefreshPopular(storeName, url, pageSize) {
+export function onRefreshPopular (storeName, url, pageSize) {
   return dispatch => {
     dispatch({ type: types.POPULAR_REFRESH, storeName })
-    let dataStore = new DataStore()
+    const dataStore = new DataStore()
     dataStore
       .fetchData(url, FLAG_STORAGE.flag_popular)
       .then(data => {
@@ -19,7 +18,7 @@ export function onRefreshPopular(storeName, url, pageSize) {
   }
 }
 
-export function onLoadMorePopular(storeName, pageIndex, pageSize, dataArray = [], callBack) {
+export function onLoadMorePopular (storeName, pageIndex, pageSize, dataArray = [], callBack) {
   const dataLength = dataArray.length
   return dispatch => {
     setTimeout(() => {
@@ -35,7 +34,7 @@ export function onLoadMorePopular(storeName, pageIndex, pageSize, dataArray = []
           projectModes: dataArray
         })
       } else {
-        let max = pageIndex * pageSize > dataLength ? dataLength : pageIndex * pageSize
+        const max = pageIndex * pageSize > dataLength ? dataLength : pageIndex * pageSize
         dispatch({
           type: types.POPULAR_LOAD_MORE_SUCCESS,
           storeName,
@@ -46,5 +45,3 @@ export function onLoadMorePopular(storeName, pageIndex, pageSize, dataArray = []
     }, 200)
   }
 }
-
-

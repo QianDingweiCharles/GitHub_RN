@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import NavigationUtil from '../navigator/NavigationUtil'
 import DynamicTabNavigator from '../navigator/DynamicTabNavigator'
 
-class HomePage extends React.Component {
+class HomePage extends React.Component { 
   componentDidMount() {
     BackHandler.addEventListener('hardwareBackPress', this.onBackPress)
   }

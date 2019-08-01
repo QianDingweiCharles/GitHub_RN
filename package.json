@@ -41,7 +41,11 @@
     "metro-react-native-babel-preset": "0.54.1",
     "prettier": "^1.16.1",
     "react-test-renderer": "16.8.6",
-    "redux-devtools": "^3.5.0"
+    "redux-devtools": "^3.5.0",
+    "standard": "^13.1.0"
+  },
+  "standard": {
+    "parser": "babel-eslint"
   },
   "jest": {
     "preset": "react-native"
