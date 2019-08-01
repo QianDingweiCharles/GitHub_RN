@@ -4,7 +4,6 @@ import {
   BottomTabBar,
   createAppContainer
 } from 'react-navigation'
-import { DeviceInfo } from 'react-native'
 import { connect } from 'react-redux'
 import PopularPage from '../page/PopularPage'
 import TrendingPage from '../page/TrendingPage'
@@ -29,6 +28,7 @@ const tabsConfig = {
   PopularPage: {
     screen: PopularPage,
     navigationOptions: {
+      header: null,
       tabBarLabel: '最热',
       tabBarIcon: ({ tintColor, focused }) => (
         <MaterialIcons
@@ -42,6 +42,7 @@ const tabsConfig = {
   TrendingPage: {
     screen: TrendingPage,
     navigationOptions: {
+      header: null,
       tabBarLabel: '趋势',
       tabBarIcon: ({ tintColor, focused }) => (
         <Ionicons
@@ -53,6 +54,7 @@ const tabsConfig = {
     }
   },
   FavoritePage: {
+    header: null,
     screen: FavoritePage,
     navigationOptions: {
       tabBarLabel: '收藏',
@@ -66,6 +68,7 @@ const tabsConfig = {
     }
   },
   MyPage: {
+    header: null,
     screen: MyPage,
     navigationOptions: {
       tabBarLabel: '我的',

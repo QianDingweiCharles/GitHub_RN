@@ -16,6 +16,7 @@ import Toast from 'react-native-easy-toast'
 import actions from '../action'
 import PopularItem from '../common/popularItem'
 import NavigationBar from '../common//NavigationBar'
+import NavigationUtil from '../navigator/NavigationUtil';
 
 const URL = 'https://api.github.com/search/repositories?q='
 const QUERY_STR = '&sort=stars'
@@ -113,7 +114,11 @@ class PopularTab extends React.Component {
     return (
       <PopularItem
         item={item}
-        onSelect={() => { }}
+        onSelect={() => {
+          NavigationUtil.goPage({
+            projectModel: item
+          }, 'DetailPage')
+        }}
       />
     )
   }
