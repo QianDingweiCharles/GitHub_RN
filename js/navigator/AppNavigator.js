@@ -76,7 +76,7 @@ export const middleware = createReactNavigationReduxMiddleware(
 const App = createReduxContainer(RootNavigator)
 
 const mapStateToProps = state => ({
-  state: state.nav //v2
+  state: state.nav
 })
 
 export default connect(mapStateToProps)(App)

@@ -4,31 +4,24 @@ import {
   TextInput,
   Button,
   StyleSheet,
-  Text,
-  AsyncStorage
-} from 'react-native'
-import { NavigationActions } from 'react-navigation'
-import { connect } from 'react-redux'
-import NavigationUtil from '../navigator/NavigationUtil'
-import DynamicTabNavigator from '../navigator/DynamicTabNavigator'
+  Text } from 'react-native'
 import DataStore from '../expand/dao/DataStore'
 
-const KEY = 'sanve_key'
-
 export default class DataStoreDemoPage extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       showText: ''
     }
     this.dataStore = new DataStore()
   }
-  loadData() {
+
+  loadData () {
     const url = `https://api.github.com/search/repositories?q=${this.value}`
     this.dataStore
       .fetchData(url)
       .then(data => {
-        let showData = `初次加载时间： ${new Date(
+        const showData = `初次加载时间： ${new Date(
           data.timeStamp
         )}\n${JSON.stringify(data.data)}`
         this.setState({ showText: showData })
@@ -37,7 +30,8 @@ export default class DataStoreDemoPage extends React.Component {
         error && console.log(error.toString())
       })
   }
-  render() {
+
+  render () {
     return (
       <View style={styles.container}>
         <Text>离线缓存框架设计</Text>
@@ -51,7 +45,7 @@ export default class DataStoreDemoPage extends React.Component {
           onPress={() => {
             this.loadData()
           }}
-          title="获取数据"
+          title='获取数据'
         />
         <Text>{this.state.showText}</Text>
       </View>
