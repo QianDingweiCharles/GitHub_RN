@@ -4,12 +4,12 @@ import { connect } from 'react-redux'
 import actions from '../action/index.js'
 
 class FavoritePage extends React.Component {
-  render() {
+  render () {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>FavoritePage</Text>
         <Button
-          title="改变主题色--绿色"
+          title='改变主题色--绿色'
           onPress={() => {
             this.props.onThemeChange('green')
           }}

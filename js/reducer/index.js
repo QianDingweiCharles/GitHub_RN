@@ -5,7 +5,7 @@ import theme from './theme'
 import popular from './popular'
 import trending from './trending'
 
-//1.指定默认state
+// 1.指定默认state
 const navState = RootNavigator.router.getStateForAction(
   RootNavigator.router.getActionForPathAndParams(rootCom)
 )

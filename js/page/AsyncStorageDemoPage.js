@@ -2,50 +2,46 @@ import React from 'react'
 import {
   View,
   TextInput,
-  Button,
   StyleSheet,
   Text,
   AsyncStorage
 } from 'react-native'
-import { NavigationActions } from 'react-navigation'
-import { connect } from 'react-redux'
-import NavigationUtil from '../navigator/NavigationUtil'
-import DynamicTabNavigator from '../navigator/DynamicTabNavigator'
 
 const KEY = 'sanve_key'
 
 export default class AsyncStorageDemoPage extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       searchKey: '',
       showText: ''
     }
   }
-  async doSave() {
+
+  async doSave () {
     AsyncStorage.setItem(KEY, this.state.searchKey, (error, result) => {
       if (!error) {
-        //更新Favorite的key
+        // 更新Favorite的key
         // this.updateFavoriteKeys(key, true)
       }
     })
   }
 
-  async doRemove() {
-    AsyncStorage.getItem(KEY, (error, result) => {
-      if (!error) {
-        try {
-          resolve(JSON.parse(result))
-        } catch (e) {
-          reject(error)
-        }
-      } else {
-        reject(error)
-      }
-    })
-  }
+  // async doRemove () {
+  //   AsyncStorage.getItem(KEY, (error, result) => {
+  //     if (!error) {
+  //       try {
+  //         resolve(JSON.parse(result))
+  //       } catch (e) {
+  //         reject(error)
+  //       }
+  //     } else {
+  //       reject(error)
+  //     }
+  //   })
+  // }
 
-  async getDate() {
+  async getDate () {
     AsyncStorage.getItem(KEY, (error, result) => {
       if (!error) {
         try {
@@ -53,12 +49,11 @@ export default class AsyncStorageDemoPage extends React.Component {
             showText: result
           })
         } catch (e) {}
-      } else {
-      }
+      } else {}
     })
   }
 
-  render() {
+  render () {
     return (
       <View style={styles.container}>
         <Text>AsyncStorageDemoPage使用</Text>

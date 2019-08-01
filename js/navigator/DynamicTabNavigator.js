@@ -14,11 +14,12 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import Entypo from 'react-native-vector-icons/Entypo'
 
 class TabComponent extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     console.disableYellowBox = true
   }
-  render() {
+
+  render () {
     return <BottomTabBar {...this.props} activeTintColor={this.props.theme} />
   }
 }
@@ -80,12 +81,12 @@ const tabsConfig = {
 }
 
 class DynamicTabNavigator extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     console.disableYellowBox = true
   }
 
-  _tabBarOptions() {
+  _tabBarOptions () {
     const TabBarOptions = {
       tabBarOptions: {
         activeTintColor: 'blue'
@@ -98,11 +99,11 @@ class DynamicTabNavigator extends React.Component {
   }
 
   // 获取动态的Tab
-  _tabNavigator() {
+  _tabNavigator () {
     if (this.Tabs) {
       return this.Tabs
     }
-    const { PopularPage, TrendingPage, FavoritePage, MyPage } = tabsConfig //根据需要定制要显示的tab
+    const { PopularPage, TrendingPage, FavoritePage, MyPage } = tabsConfig // 根据需要定制要显示的tab
     const tabs = { PopularPage, TrendingPage, FavoritePage, MyPage }
 
     return (this.Tabs = createAppContainer(
@@ -110,7 +111,7 @@ class DynamicTabNavigator extends React.Component {
     ))
   }
 
-  render() {
+  render () {
     const Tabs = this._tabNavigator()
     return <Tabs />
   }

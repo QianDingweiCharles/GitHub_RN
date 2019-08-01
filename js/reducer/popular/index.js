@@ -12,7 +12,7 @@ import types from '../../action/types'
 //     }
 // }
 const defaultState = {}
-export default function onAction(state = defaultState, action) {
+export default function onAction (state = defaultState, action) {
   switch (action.type) {
     case types.POPULAR_REFRESH_SUCCESS: // 下拉刷新成功
       return {
@@ -30,9 +30,9 @@ export default function onAction(state = defaultState, action) {
       return {
         ...state,
         isLoading: true,
-        hideLoadingMore: false,
+        hideLoadingMore: false
       }
-    case types.POPULAR_REFRESH_FAIL: //下拉刷新失败
+    case types.POPULAR_REFRESH_FAIL: // 下拉刷新失败
       return {
         ...state,
         ...state[action.storeName],
@@ -48,7 +48,7 @@ export default function onAction(state = defaultState, action) {
           pageIndex: action.pageIndex
         }
       }
-    case types.POPULAR_LOAD_MORE_FAIL: //下拉刷新失败
+    case types.POPULAR_LOAD_MORE_FAIL: // 下拉刷新失败
       return {
         ...state,
         [action.storeName]: {

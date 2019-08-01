@@ -1,12 +1,8 @@
 import React from 'react'
 import { View, TextInput, Button, StyleSheet, Text } from 'react-native'
-import { NavigationActions } from 'react-navigation'
-import { connect } from 'react-redux'
-import NavigationUtil from '../navigator/NavigationUtil'
-import DynamicTabNavigator from '../navigator/DynamicTabNavigator'
 
 export default class FetchDemoPage extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       searchKey: '',
@@ -14,7 +10,7 @@ export default class FetchDemoPage extends React.Component {
     }
   }
 
-  loadData() {
+  loadData () {
     const url = `https://github.com/search?q=${this.state.searchKey}`
     fetch(url)
       .then(response => {
@@ -35,7 +31,7 @@ export default class FetchDemoPage extends React.Component {
       })
   }
 
-  render() {
+  render () {
     return (
       <View style={styles.container}>
         <Text>Fetch使用</Text>
