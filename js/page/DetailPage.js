@@ -16,8 +16,9 @@ export default class DetailPage extends React.Component {
     super(props)
     this.params = this.props.navigation.state.params
     const { projectModel } = this.params
-    this.url = projectModel.html_url || TRENDINF_URL + projectModel.fullName
-    const title = projectModel.full_name || projectModel.fullName
+    const {item}=projectModel
+    this.url = item.html_url || TRENDINF_URL + item.fullName
+    const title = item.full_name || item.fullName
     this.state = {
       title: title,
       url: this.url,
@@ -73,7 +74,8 @@ export default class DetailPage extends React.Component {
   }
 
   render() {
-    const titleLayoutStyle = this.state.title.length> 20 ? {paddingRight: 30}: null
+    const tempState = this.state || {}
+    const titleLayoutStyle = tempState.title.length> 20 ? {paddingRight: 30}: null
     let navigationBar = (
       <NavigationBar
         title={this.state.title}

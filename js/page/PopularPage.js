@@ -17,11 +17,15 @@ import actions from '../action'
 import PopularItem from '../common/popularItem'
 import NavigationBar from '../common//NavigationBar'
 import NavigationUtil from '../navigator/NavigationUtil'
+import { FLAG_STORAGE } from '../expand/dao/DataStore'
+import FavoriteUtil from '../util/FavoriteUtil'
+import FavoriteDao from '../expand/dao/FavoriteDao'
 
 const URL = 'https://api.github.com/search/repositories?q='
 const QUERY_STR = '&sort=stars'
 const TITLE_COLOR = '#678'
 const PAGE_SIZE = 10
+const favoriteDao = new FavoriteDao(FLAG_STORAGE.flag_popular)
 
 export default class PopularPage extends React.Component {
   constructor(props) {
@@ -84,11 +88,11 @@ class PopularTab extends React.Component {
     const store = this._store()
     const url = this.genFetchUrl(this.storeName)
     if (loadMore) {
-      onLoadMorePopular(this.storeName, ++store.pageIndex, PAGE_SIZE, store.items, () => {
+      onLoadMorePopular(this.storeName, ++store.pageIndex, PAGE_SIZE, store.items, favoriteDao, () => {
         this.refs.toast.show('没有更多了')
       })
     } else {
-      onRefreshPopular(this.storeName, url, PAGE_SIZE)
+      onRefreshPopular(this.storeName, url, PAGE_SIZE, favoriteDao)
     }
   }
 
@@ -113,12 +117,14 @@ class PopularTab extends React.Component {
   renderItem = ({ item }) => {
     return (
       <PopularItem
-        item={item}
+        projectModel={item}
         onSelect={() => {
+          console.log("popularitem Press")
           NavigationUtil.goPage({
             projectModel: item
           }, 'DetailPage')
         }}
+        onFavorite={(item, isFavorite) => FavoriteUtil.onFavorite(favoriteDao, item, isFavorite,FLAG_STORAGE.flag_popular)}
       />
     )
   }
@@ -141,7 +147,7 @@ class PopularTab extends React.Component {
         <FlatList
           data={store.projectModes}
           renderItem={this.renderItem}
-          keyExtractor={item => '' + item.id}
+          keyExtractor={item => '' + item.item.id}
           refreshControl={
             <RefreshControl
               title={'Loading'}
@@ -180,10 +186,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onRefreshPopular: (storeName, url, pageSize) =>
-      dispatch(actions.onRefreshPopular(storeName, url, pageSize)),
-    onLoadMorePopular: (storeName, pageIndex, pageSize, items, callBack) => (
-      dispatch(actions.onLoadMorePopular(storeName, pageIndex, pageSize, items, callBack))
+    onRefreshPopular: (storeName, url, pageSize,favoriteDao) =>
+      dispatch(actions.onRefreshPopular(storeName, url, pageSize, favoriteDao)),
+    onLoadMorePopular: (storeName, pageIndex, pageSize, items, favoriteDao,callBack) => (
+      dispatch(actions.onLoadMorePopular(storeName, pageIndex, pageSize, items, favoriteDao, callBack))
     )
   }
 }
